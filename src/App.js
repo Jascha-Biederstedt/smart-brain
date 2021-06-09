@@ -1,5 +1,12 @@
+import React from 'react';
+import Navigation from './components/Navigation/Navigation';
+
 function App() {
-  return <h1>Start</h1>;
+  return (
+    <div>
+      <Navigation />
+    </div>
+  );
 }
 
 export default App;
