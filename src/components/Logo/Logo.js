@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <div className="ma4 mt0">
       <Tilt
-        className="br2 shadow-2 pa3"
+        className="br2 shadow-5 pa3"
         style={{
           width: '150px',
           height: '150px',

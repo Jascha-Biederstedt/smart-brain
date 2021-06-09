@@ -4,8 +4,9 @@ const ImageLinkForm = () => {
   return (
     <div>
       <p style={{ textAlign: 'center' }}>
-        This Magic Brain will detect faces in your pictures. Insert a URL and
-        give it a try.
+        This Magic Brain will detect faces in your pictures.
+        <br />
+        Insert a URL and give it a try.
       </p>
       <div
         style={{
