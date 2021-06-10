@@ -26,6 +26,7 @@ const particlesOptions = {
 function App() {
   const [input, setInput] = useState('');
   const [imageURL, setImageURL] = useState('');
+  const [box, setBox] = useState({});
 
   const loaded = useRef(false);
 
@@ -37,18 +38,33 @@ function App() {
     setImageURL(input);
   };
 
+  const calcFaceLocation = data => {
+    const image = document.getElementById('inputImage');
+    const width = Number(image.width);
+    const height = Number(image.height);
+
+    return {
+      leftCol: data.left_col * width,
+      topRow: data.top_row * height,
+      rightCol: width - data.right_col * width,
+      bottomRow: height - data.bottom_row * height,
+    };
+  };
+
+  const displayFaceBox = box => {
+    setBox(box);
+  };
+
   useEffect(() => {
     if (loaded.current) {
-      app.models.predict('a403429f2ddf4b49b307e318f00e528b', imageURL).then(
-        function (response) {
-          console.log(
-            response.outputs[0].data.regions[0].region_info.bounding_box
-          );
-        },
-        function (error) {
-          console.log(error);
-        }
-      );
+      app.models
+        .predict('a403429f2ddf4b49b307e318f00e528b', imageURL)
+        .then(response => {
+          const data =
+            response.outputs[0].data.regions[0].region_info.bounding_box;
+          displayFaceBox(calcFaceLocation(data));
+        })
+        .catch(error => console.log(error));
     } else {
       loaded.current = true;
     }
@@ -70,7 +86,7 @@ function App() {
       <Navigation />
       <Rank />
       <ImageLinkForm onInputChange={onInputChange} onBtnClick={onBtnClick} />
-      <FaceRecognition imageURL={imageURL} />
+      <FaceRecognition imageURL={imageURL} box={box} />
     </div>
   );
 }
