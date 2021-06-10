@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ImageLinkForm = () => {
+const ImageLinkForm = ({ onInputChange, onBtnClick }) => {
   return (
     <div>
       <p style={{ textAlign: 'center' }}>
@@ -18,6 +18,7 @@ const ImageLinkForm = () => {
         <input
           type="text"
           className="f4 pa2 w-70 center shadow-5"
+          onChange={onInputChange}
           style={{
             margin: '.5rem 0 1rem',
             outline: 'none',
@@ -27,6 +28,7 @@ const ImageLinkForm = () => {
         ></input>
         <button
           className="w-30 grow f4 link ph3 pv2 dib white bg-light-purple shadow-5"
+          onClick={onBtnClick}
           style={{ borderRadius: '5px', outline: 'none' }}
         >
           Detect
