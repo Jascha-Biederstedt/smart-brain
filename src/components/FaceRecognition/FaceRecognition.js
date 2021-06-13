@@ -23,7 +23,6 @@ const FaceRecognition = ({ imageURL, box }) => {
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'center',
-            cursor: 'pointer',
             top: box.topRow,
             bottom: box.bottomRow,
             left: box.leftCol,

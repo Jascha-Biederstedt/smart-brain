@@ -7,6 +7,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 
 const app = new Clarifai.App({
   apiKey: API_KEY,
@@ -28,7 +29,7 @@ function App() {
   const [input, setInput] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [box, setBox] = useState({});
-  const signedIn = true;
+  const [route, setRoute] = useState('signIn');
 
   const loaded = useRef(false);
 
@@ -55,6 +56,10 @@ function App() {
 
   const displayFaceBox = box => {
     setBox(box);
+  };
+
+  const onRouteChange = route => {
+    setRoute(route);
   };
 
   useEffect(() => {
@@ -85,12 +90,13 @@ function App() {
           zIndex: '-1',
         }}
       />
-
-      {!signedIn ? (
-        <SignIn />
+      {route === 'signIn' ? (
+        <SignIn onRouteChange={onRouteChange} />
+      ) : route === 'register' ? (
+        <Register onRouteChange={onRouteChange} />
       ) : (
         <div>
-          <Navigation />
+          <Navigation onRouteChange={onRouteChange} />
           <Rank />
           <ImageLinkForm
             onInputChange={onInputChange}

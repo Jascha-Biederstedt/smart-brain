@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
 
-const Navigation = () => {
+const Navigation = ({ onRouteChange }) => {
   return (
     <div>
       <nav
@@ -11,7 +11,12 @@ const Navigation = () => {
         }}
       >
         <Logo />
-        <p className="f3 link dim black underline pa3 pointer">Sign out</p>
+        <p
+          className="f3 link dim black underline pa3 pointer"
+          onClick={() => onRouteChange('signIn')}
+        >
+          Sign out
+        </p>
       </nav>
     </div>
   );
