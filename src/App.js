@@ -6,6 +6,7 @@ import Navigation from './components/Navigation/Navigation';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import SignIn from './components/SignIn/SignIn';
 
 const app = new Clarifai.App({
   apiKey: API_KEY,
@@ -27,6 +28,7 @@ function App() {
   const [input, setInput] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [box, setBox] = useState({});
+  const signedIn = true;
 
   const loaded = useRef(false);
 
@@ -71,7 +73,7 @@ function App() {
   }, [imageURL]);
 
   return (
-    <div>
+    <React.Fragment>
       <Particles
         params={particlesOptions}
         style={{
@@ -83,11 +85,21 @@ function App() {
           zIndex: '-1',
         }}
       />
-      <Navigation />
-      <Rank />
-      <ImageLinkForm onInputChange={onInputChange} onBtnClick={onBtnClick} />
-      <FaceRecognition imageURL={imageURL} box={box} />
-    </div>
+
+      {!signedIn ? (
+        <SignIn />
+      ) : (
+        <div>
+          <Navigation />
+          <Rank />
+          <ImageLinkForm
+            onInputChange={onInputChange}
+            onBtnClick={onBtnClick}
+          />
+          <FaceRecognition imageURL={imageURL} box={box} />
+        </div>
+      )}
+    </React.Fragment>
   );
 }
 
