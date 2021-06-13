@@ -19,7 +19,7 @@ const Register = ({ onRouteChange }) => {
                 type="name"
                 name="name"
                 id="name"
-                style={{ outline: 'none' }}
+                style={{ outline: 'none', boxSizing: 'border-box' }}
               />
             </div>
             <div className="mt3">
@@ -52,7 +52,7 @@ const Register = ({ onRouteChange }) => {
               className="b ph3 pv2 input-reset ba b--black bg-transparent dim pointer f6 dib"
               type="submit"
               value="Register"
-              onClick={() => onRouteChange('signIn')}
+              onClick={() => onRouteChange('home')}
             />
           </div>
         </form>
