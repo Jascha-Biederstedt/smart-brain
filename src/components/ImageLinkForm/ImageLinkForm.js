@@ -3,7 +3,7 @@ import React from 'react';
 const ImageLinkForm = ({ onInputChange, onBtnClick }) => {
   return (
     <div>
-      <p style={{ textAlign: 'center' }}>
+      <p className="white f3" style={{ textAlign: 'center' }}>
         This Magic Brain will detect faces in your pictures.
         <br />
         Insert a URL of an image and give it a try.

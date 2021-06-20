@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Register = ({ onRouteChange, loadUser }) => {
+const Register = ({ onRouteChange }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +27,6 @@ const Register = ({ onRouteChange, loadUser }) => {
       .then(response => response.json())
       .then(user => {
         if (user) {
-          loadUser(user);
           onRouteChange('home');
         }
       });

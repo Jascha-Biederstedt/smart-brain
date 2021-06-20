@@ -4,7 +4,6 @@ import Clarifai from 'clarifai';
 import API_KEY from './config';
 import Navigation from './components/Navigation/Navigation';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
@@ -30,7 +29,6 @@ function App() {
   const [imageURL, setImageURL] = useState('');
   const [box, setBox] = useState({});
   const [route, setRoute] = useState('signIn');
-  const [user, setUser] = useState({});
 
   const loaded = useRef(false);
 
@@ -78,16 +76,6 @@ function App() {
     }
   }, [imageURL]);
 
-  const loadUser = data => {
-    setUser({
-      id: data.id,
-      name: data.name,
-      email: data.email,
-      entries: data.entries,
-      joined: data.joined,
-    });
-  };
-
   return (
     <React.Fragment>
       <Particles
@@ -102,13 +90,12 @@ function App() {
         }}
       />
       {route === 'signIn' ? (
-        <SignIn loadUser={loadUser} onRouteChange={onRouteChange} />
+        <SignIn onRouteChange={onRouteChange} />
       ) : route === 'register' ? (
-        <Register loadUser={loadUser} onRouteChange={onRouteChange} />
+        <Register onRouteChange={onRouteChange} />
       ) : (
         <div>
           <Navigation onRouteChange={onRouteChange} />
-          <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm
             onInputChange={onInputChange}
             onBtnClick={onBtnClick}
