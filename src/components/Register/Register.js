@@ -7,7 +7,7 @@ const Register = ({ onRouteChange }) => {
       style={{ borderRadius: '5px' }}
     >
       <main className="pa4 black-80">
-        <form className="measure">
+        <div className="measure">
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
             <legend className="f2 fw6 ph0 mh0 center">Register</legend>
             <div className="mt3">
@@ -55,7 +55,7 @@ const Register = ({ onRouteChange }) => {
               onClick={() => onRouteChange('home')}
             />
           </div>
-        </form>
+        </div>
       </main>
     </div>
   );
