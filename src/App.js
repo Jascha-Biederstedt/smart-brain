@@ -30,6 +30,7 @@ function App() {
   const [imageURL, setImageURL] = useState('');
   const [box, setBox] = useState({});
   const [route, setRoute] = useState('signIn');
+  const [user, setUser] = useState({});
 
   const loaded = useRef(false);
 
@@ -77,6 +78,16 @@ function App() {
     }
   }, [imageURL]);
 
+  const loadUser = data => {
+    setUser({
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.joined,
+    });
+  };
+
   return (
     <React.Fragment>
       <Particles
@@ -91,13 +102,13 @@ function App() {
         }}
       />
       {route === 'signIn' ? (
-        <SignIn onRouteChange={onRouteChange} />
+        <SignIn loadUser={loadUser} onRouteChange={onRouteChange} />
       ) : route === 'register' ? (
-        <Register onRouteChange={onRouteChange} />
+        <Register loadUser={loadUser} onRouteChange={onRouteChange} />
       ) : (
         <div>
           <Navigation onRouteChange={onRouteChange} />
-          <Rank />
+          <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm
             onInputChange={onInputChange}
             onBtnClick={onBtnClick}

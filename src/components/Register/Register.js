@@ -1,6 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Register = ({ onRouteChange }) => {
+const Register = ({ onRouteChange, loadUser }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onNameChange = event => {
+    setName(event.target.value);
+  };
+
+  const onEmailChange = event => {
+    setEmail(event.target.value);
+  };
+
+  const onPasswordChange = event => {
+    setPassword(event.target.value);
+  };
+
+  const onFormSubmit = event => {
+    event.preventDefault();
+    fetch('http://localhost:3001/register', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password }),
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user) {
+          loadUser(user);
+          onRouteChange('home');
+        }
+      });
+  };
+
   return (
     <div
       className="shadow-5 ba b--black-10 mv4 w-100 mw6 center"
@@ -19,6 +51,7 @@ const Register = ({ onRouteChange }) => {
                 type="name"
                 name="name"
                 id="name"
+                onChange={onNameChange}
                 style={{ outline: 'none', boxSizing: 'border-box' }}
               />
             </div>
@@ -31,6 +64,7 @@ const Register = ({ onRouteChange }) => {
                 type="email"
                 name="email-address"
                 id="email-address"
+                onChange={onEmailChange}
                 style={{ outline: 'none' }}
               />
             </div>
@@ -43,6 +77,7 @@ const Register = ({ onRouteChange }) => {
                 type="password"
                 name="password"
                 id="password"
+                onChange={onPasswordChange}
                 style={{ outline: 'none' }}
               />
             </div>
@@ -52,7 +87,7 @@ const Register = ({ onRouteChange }) => {
               className="b ph3 pv2 input-reset ba b--black bg-transparent dim pointer f6 dib"
               type="submit"
               value="Register"
-              onClick={() => onRouteChange('home')}
+              onClick={onFormSubmit}
             />
           </div>
         </div>
