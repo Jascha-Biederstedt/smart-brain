@@ -58,6 +58,10 @@ function App() {
   };
 
   const onRouteChange = route => {
+    if (route === 'signIn') {
+      setImageURL('');
+    }
+
     setRoute(route);
   };
 
