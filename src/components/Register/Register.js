@@ -19,7 +19,7 @@ const Register = ({ onRouteChange }) => {
 
   const onFormSubmit = event => {
     event.preventDefault();
-    fetch('http://localhost:3001/register', {
+    fetch('https://smart-brain-face-recognitions.herokuapp.com/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password }),

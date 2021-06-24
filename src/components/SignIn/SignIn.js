@@ -14,7 +14,7 @@ const SignIn = ({ onRouteChange }) => {
 
   const onFormSubmit = event => {
     event.preventDefault();
-    fetch('http://localhost:3001/signin', {
+    fetch('https://smart-brain-face-recognitions.herokuapp.com/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),

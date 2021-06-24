@@ -62,7 +62,7 @@ function App() {
   useEffect(() => {
     if (loaded.current) {
       if (imageURL) {
-        fetch('http://localhost:3001/imageURL', {
+        fetch('https://smart-brain-face-recognitions.herokuapp.com/imageURL', {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ imageURL }),
