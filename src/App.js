@@ -1,16 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
-import API_KEY from './config';
 import Navigation from './components/Navigation/Navigation';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
-
-const app = new Clarifai.App({
-  apiKey: API_KEY,
-});
 
 const particlesOptions = {
   particles: {
@@ -67,14 +61,20 @@ function App() {
 
   useEffect(() => {
     if (loaded.current) {
-      app.models
-        .predict('a403429f2ddf4b49b307e318f00e528b', imageURL)
-        .then(response => {
-          const data =
-            response.outputs[0].data.regions[0].region_info.bounding_box;
-          displayFaceBox(calcFaceLocation(data));
+      if (imageURL) {
+        fetch('http://localhost:3001/imageURL', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ imageURL }),
         })
-        .catch(error => console.log(error));
+          .then(response => response.json())
+          .then(response => {
+            const data =
+              response.outputs[0].data.regions[0].region_info.bounding_box;
+            displayFaceBox(calcFaceLocation(data));
+          })
+          .catch(error => console.log(error));
+      }
     } else {
       loaded.current = true;
     }
